@@ -13,7 +13,7 @@ public class Superhero {
     private String name;
     @Column
     private String superhero;
-    public Superhero(int id, String superhero) {
+    public Superhero(int id, String name, String superhero) {
         this.id = id;
         this.superhero = superhero;}
     public Superhero() {}
