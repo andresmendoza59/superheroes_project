@@ -11,18 +11,18 @@ public class SuperheroService {
     private SuperheroRepository superheroRepository;
     public String createSuperhero(Superhero superhero) {
         superheroRepository.save(superhero);
-        return "Superhero added successfully with ID: " + superhero.getId();
+        return "Superhero added successfully";
     }
     public Superhero findById(int id) {
         return superheroRepository.getReferenceById(id);
     }
     public String updateSuperhero(Superhero superhero) {
         superheroRepository.save(superhero);
-        return "Superhero updated successfully with ID" + superhero.getId();
+        return "Superhero updated successfully";
     }
     public String deleteSuperhero(int id) {
         Superhero superhero = superheroRepository.getReferenceById(id);
         superheroRepository.delete(superhero);
-        return "Superhero eliminated with ID" + superhero.getId();
+        return "Superhero successfully eliminated";
     }
 }
