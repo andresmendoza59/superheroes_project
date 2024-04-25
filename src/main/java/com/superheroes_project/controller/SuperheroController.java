@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/superheroes")
 public class SuperheroController {
     @Autowired
     private SuperheroService superheroService;
