@@ -18,4 +18,12 @@ public class Powers {
     public void setPower(String power) {this.power = power;}
     public void setId_superhero(int id_superhero) {this.id_superhero = id_superhero;}
     public int getId_superhero() {return id_superhero;}
+    @Override
+    public String toString() {
+        return "Powers{" +
+                "power_id=" + power_id +
+                ", power='" + power + '\'' +
+                ", id_superhero=" + id_superhero +
+                '}';
+    }
 }

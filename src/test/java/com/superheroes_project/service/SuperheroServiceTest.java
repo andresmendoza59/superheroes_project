@@ -19,11 +19,13 @@ class SuperheroServiceTest {
     @InjectMocks
     private SuperheroService superheroService;
     private AutoCloseable openMocks;
-    private Superhero superhero;
+    private final Superhero superhero = new Superhero();
     @BeforeEach
     void setUp() {
         openMocks = MockitoAnnotations.openMocks(this);
-        superhero = new Superhero(1, "Bruce Wayne", "Batman");
+        superhero.setId(1);
+        superhero.setName("Bruce Wayne");
+        superhero.setSuperhero("Batman");
     }
     @AfterEach
     void tearDown() throws Exception {
@@ -38,7 +40,9 @@ class SuperheroServiceTest {
     }
     @Test
     void createSuperhero2() {
-        Superhero superhero = new Superhero(6, "Clark Kent", "Superman");
+        superhero.setId(2);
+        superhero.setName("Clark Kent");
+        superhero.setSuperhero("Superman");
         when(superheroRepository.save(superhero)).thenReturn(superhero);
         String result = superheroService.createSuperhero(superhero);
         assertEquals("Superhero added successfully", result);
@@ -48,37 +52,49 @@ class SuperheroServiceTest {
     void findById() {
         int id = superhero.getId();
         when(superheroRepository.getReferenceById(id)).thenReturn(superhero);
-        Superhero result = superheroService.findById(id);
-        assertEquals(superhero, result);
+        String result = superheroService.findById(id);
+        assertEquals(superhero.toString(), result);
         verify(superheroRepository, times(1)).getReferenceById(id);
     }
     @Test
     void findById2() {
-        Superhero superhero = new Superhero(3, "Diana Princess", "Wonder Woman");
+        superhero.setId(3);
+        superhero.setName("Diana Prince");
+        superhero.setSuperhero("Wonder Woman");
         int id = superhero.getId();
         when(superheroRepository.getReferenceById(id)).thenReturn(superhero);
-        Superhero result = superheroService.findById(id);
-        assertEquals(superhero, result);
+        String result = superheroService.findById(id);
+        assertEquals(superhero.toString(), result);
         verify(superheroRepository, times(1)).getReferenceById(id);
     }
     @Test
     void updateSuperhero() {
+        Superhero new_superhero = new Superhero();
+        new_superhero.setId(4);
+        new_superhero.setName("Travis Scott");
+        new_superhero.setSuperhero("Batman");
+        when(superheroRepository.getReferenceById(1)).thenReturn(superhero);
         when(superheroRepository.save(superhero)).thenReturn(superhero);
-        String result = superheroService.updateSuperhero(superhero);
+        String result = superheroService.updateSuperhero(superhero.getId(), new_superhero);
         assertEquals("Superhero updated successfully", result);
+        verify(superheroRepository, times(1)).getReferenceById(1);
         verify(superheroRepository, times(1)).save(superhero);
     }
     @Test
     void updateSuperhero2() {
-        Superhero superhero = new Superhero(5, "Bruce Banner", "Hulk");
+        Superhero new_superhero = new Superhero();
+        new_superhero.setId(5);
+        new_superhero.setName("Bruce Banner");
+        new_superhero.setSuperhero("Hulk");
+        when(superheroRepository.getReferenceById(1)).thenReturn(superhero);
         when(superheroRepository.save(superhero)).thenReturn(superhero);
-        String result = superheroService.updateSuperhero(superhero);
+        String result = superheroService.updateSuperhero(superhero.getId(), new_superhero);
         assertEquals("Superhero updated successfully", result);
+        verify(superheroRepository, times(1)).getReferenceById(1);
         verify(superheroRepository, times(1)).save(superhero);
     }
     @Test
     void deleteSuperhero() {
-        Superhero superhero = new Superhero(1, "Bruce Wayne", "Batman");
         when(superheroRepository.getReferenceById(1)).thenReturn(superhero);
         String result = superheroService.deleteSuperhero(1);
         assertEquals("Superhero successfully eliminated", result);
@@ -86,9 +102,11 @@ class SuperheroServiceTest {
     }
     @Test
     void deleteSuperhero2() {
-        Superhero superhero = new Superhero(2, "Peter Parker", "Spiderman");
-        when(superheroRepository.getReferenceById(2)).thenReturn(superhero);
-        String result = superheroService.deleteSuperhero(2);
+        superhero.setId(6);
+        superhero.setName("Peter Parker");
+        superhero.setSuperhero("Spiderman");
+        when(superheroRepository.getReferenceById(6)).thenReturn(superhero);
+        String result = superheroService.deleteSuperhero(6);
         assertEquals("Superhero successfully eliminated", result);
         verify(superheroRepository, times(1)).delete(superhero);
     }

@@ -8,20 +8,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/powers")
 public class PowersController {
     @Autowired
     PowerService powerService;
-
-    @GetMapping("/getPowers")
-    public Powers getPowers(@RequestBody int id) {
-        return powerService.findById(id);
-    }
-    @PostMapping("/addPower")
+    @GetMapping
+    public String getPowers(@RequestParam int id) {return powerService.findById(id);}
+    @PostMapping
     public String addPower(@RequestBody List<Powers> powers) {
         return powerService.addPowers(powers);
     }
-    @DeleteMapping("/deletePower")
-    public String deletePower(int id) {
+    @DeleteMapping("/{id}")
+    public String deletePower(@PathVariable int id) {
         return powerService.deletePower(id);
     }
 }

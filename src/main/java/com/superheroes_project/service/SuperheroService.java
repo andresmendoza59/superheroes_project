@@ -13,11 +13,16 @@ public class SuperheroService {
         superheroRepository.save(superhero);
         return "Superhero added successfully";
     }
-    public Superhero findById(int id) {
-        return superheroRepository.getReferenceById(id);
+    public String findById(int id) {
+        Superhero superhero = superheroRepository.getReferenceById(id);
+        return superhero.toString();
     }
-    public String updateSuperhero(Superhero superhero) {
-        superheroRepository.save(superhero);
+    public String updateSuperhero(int id, Superhero superhero) {
+        Superhero existingSuperhero = superheroRepository.getReferenceById(id);
+        existingSuperhero.setId(superhero.getId());
+        existingSuperhero.setName(superhero.getName());
+        existingSuperhero.setSuperhero(superhero.getSuperhero());
+        superheroRepository.save(existingSuperhero);
         return "Superhero updated successfully";
     }
     public String deleteSuperhero(int id) {

@@ -16,8 +16,9 @@ public class PowerService {
         powersRepository.saveAll(powers);
         return "Powers saved successfully!";
     }
-    public Powers findById(int id) {
-        return powersRepository.getReferenceById(id);
+    public String findById(int id) {
+        Powers powers = powersRepository.getReferenceById(id);
+        return powers.toString();
     }
     public String deletePower(int id) {
         Powers power = powersRepository.getReferenceById(id);

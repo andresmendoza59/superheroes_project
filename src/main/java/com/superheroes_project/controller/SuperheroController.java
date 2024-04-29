@@ -6,24 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/superheroes")
 public class SuperheroController {
     @Autowired
     private SuperheroService superheroService;
 
-    @PostMapping("/create")
+    @PostMapping
     public String createSuperhero(@RequestBody Superhero superhero) {
         return superheroService.createSuperhero(superhero);
     }
-    @PutMapping("/superheroes")
-    public String updateSuperhero(@RequestBody Superhero superhero) {
-        return superheroService.updateSuperhero(superhero);
+    @PutMapping
+    public String updateSuperhero(@RequestBody Superhero superhero, @RequestParam int id) {
+        return superheroService.updateSuperhero(id, superhero);
     }
-    @DeleteMapping("/superheroes/{id}")
+    @DeleteMapping("/{id}")
     public String deleteSuperhero(@PathVariable("id") int id) {
         return superheroService.deleteSuperhero(id);
     }
-    @RequestMapping("/all/{id}")
-    public Superhero getSuperhero(@PathVariable("id") int id) {
+    @GetMapping
+    public String getSuperhero(@RequestParam int id) {
         return superheroService.findById(id);
     }
 }
