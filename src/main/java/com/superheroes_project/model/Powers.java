@@ -1,10 +1,11 @@
 package com.superheroes_project.model;
 
+import com.superheroes_project.model.interfaces.PowersInterface;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name="powers")
-public class Powers {
+public class Powers implements PowersInterface {
     @Id
     @Column(name = "id_powers")
     private int power_id;

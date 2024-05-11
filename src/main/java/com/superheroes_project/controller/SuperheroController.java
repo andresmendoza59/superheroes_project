@@ -1,15 +1,16 @@
 package com.superheroes_project.controller;
 
 import com.superheroes_project.model.Superhero;
-import com.superheroes_project.service.SuperheroService;
+import com.superheroes_project.service.SuperheroServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/superheroes")
 public class SuperheroController {
     @Autowired
-    private SuperheroService superheroService;
+    private SuperheroServices superheroService;
 
     @PostMapping
     public String createSuperhero(@RequestBody Superhero superhero) {

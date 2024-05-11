@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PowerService {
+public class PowerService implements Services {
     @Autowired
     PowersRepository powersRepository;
 
