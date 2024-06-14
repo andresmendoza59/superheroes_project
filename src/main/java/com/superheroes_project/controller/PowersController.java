@@ -7,19 +7,26 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/powers")
 public class PowersController {
     @Autowired
     PowerService powerService;
-    @GetMapping
-    public String getPowers(@RequestParam int id) {return powerService.findById(id);}
+    @GetMapping("/{id}")
+    public String getPowers(@PathVariable int id) {return powerService.findById(id);}
     @PostMapping
-    public String addPower(@RequestBody List<Powers> powers) {
-        return powerService.addPowers(powers);
+    public String addPower(@RequestBody Powers power) {
+        return powerService.addPower(power);
     }
     @DeleteMapping("/{id}")
     public String deletePower(@PathVariable int id) {
         return powerService.deletePower(id);
+    }
+    @GetMapping
+    public List<Powers> findAllPowers() {return powerService.findAll();}
+    @PutMapping("{id}")
+    public String updatePower(@PathVariable int id, @RequestBody Powers power) {
+        return powerService.updatePower(id, power);
     }
 }

@@ -21,11 +21,10 @@ public class SuperheroServices implements Services {
     }
     public String updateSuperhero(int id, Superhero superhero) {
         Superhero existingSuperhero = superheroRepository.getReferenceById(id);
-        existingSuperhero.setId(superhero.getId());
+        existingSuperhero.setTypeId(superhero.getTypeId());
         existingSuperhero.setName(superhero.getName());
-        existingSuperhero.setAge(superhero.getAge());
-        existingSuperhero.setDescription(superhero.getDescription());
-        existingSuperhero.setSuperhero(superhero.getSuperhero());
+        existingSuperhero.setAlias(superhero.getAlias());
+        existingSuperhero.setCreationDate(superhero.getCreationDate());
         superheroRepository.save(existingSuperhero);
         return "Superhero updated successfully";
     }
@@ -34,4 +33,5 @@ public class SuperheroServices implements Services {
         superheroRepository.delete(superhero);
         return "Superhero successfully eliminated";
     }
+    public List<Superhero> findAll() {return superheroRepository.findAll();}
 }
